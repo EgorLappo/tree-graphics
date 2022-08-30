@@ -17,7 +17,6 @@ license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
-    CHANGELOG.md
 
 source-repository head
   type: git
@@ -25,7 +24,9 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      CombTrees
+      Parse
+      Types
   other-modules:
       Paths_treegraphics
   hs-source-dirs:
@@ -33,6 +34,9 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       base >=4.7 && <5
+    , diagrams
+    , diagrams-lib
+    , diagrams-svg
   default-language: Haskell2010
 
 executable treegraphics-exe
@@ -44,6 +48,9 @@ executable treegraphics-exe
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , diagrams
+    , diagrams-lib
+    , diagrams-svg
     , treegraphics
   default-language: Haskell2010
 
@@ -57,5 +64,8 @@ test-suite treegraphics-test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , diagrams
+    , diagrams-lib
+    , diagrams-svg
     , treegraphics
   default-language: Haskell2010

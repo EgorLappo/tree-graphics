@@ -8,7 +8,6 @@ copyright:           "Copyright (c) 2022 Egor Lappo"
 
 extra-source-files:
 - README.md
-- CHANGELOG.md
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -21,6 +20,9 @@ description:         Please see the README on GitHub at <https://github.com/Egor
 
 dependencies:
 - base >= 4.7 && < 5
+- diagrams
+- diagrams-lib
+- diagrams-svg
 
 ghc-options:
 - -Wall
