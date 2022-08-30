@@ -45,6 +45,9 @@ treeLeafCount (Leaf _) = 1
 treeLeafCount (Node _ l r) = treeLeafCount l + treeLeafCount r
 
 -- *** ADDING LABELS *** 
+leafLabeledTree = labeledTree' empty leafLabel
+labeledTree = labeledTree' nodeLabel leafLabel
+
 labeledTree' :: (String -> Diagram B)          -- the formatter for the leaf noeds
              -> (Nudge -> String -> Diagram B) -- the formatter for the internal nodes
              -> LabTree                        -- the tree that we are drawing
@@ -72,6 +75,9 @@ treeLabels n leafFmt nodeFmt pos t@(Node s l r) =
 data Nudge = L | R deriving (Eq, Show)
 
 -- *** NODE DATA FORMATTERS ***
+-- so far these are just simple text functions
+-- however, it's also possible to add any sort of customization here:
+-- padding, spacing, circles to denote nodes, some sort of extra lines, etc.
 empty :: Nudge -> String -> Diagram B
 empty _ _ = strokeLine emptyLine
 
