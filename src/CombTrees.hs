@@ -30,7 +30,7 @@ makeUnlabeledTree pos t@(Node _ l r) =
     edges = fromOffsets [negated lOff, rOff] `at` leftChildPos
 
 subtreeOffsets :: (Int, Int) -> (V2 Double, V2 Double)
-subtreeOffsets counts = ((-r) ^& (-r), (-l)  ^& (-l))
+subtreeOffsets counts = ((-r) ^& (-r), l  ^& (-l))
     where (l, r) = counts & each %~ fromIntegral -- i.e. "fmap" of fromIntegral to tuple
 
 subtreeLeafCounts :: Tree a -> (Int, Int)

@@ -5,15 +5,7 @@ import Diagrams.Backend.SVG.CmdLine
 
 import CombTrees
 import Types
+import Parse
 
 main :: IO ()
-main = mainWith $ (unlabeledTree tree1 :: Diagram B)
-
-tree1 :: LabTree
-tree1 = Node "c" (Leaf "a") (Leaf "b")
-
-tree2 :: LabTree
-tree2 = Node "e" (Node "d" (Leaf "a") (Leaf "b")) (Leaf "c")
-
-tree3 :: LabTree
-tree3 = Node "g" (Node "e" (Leaf "a") (Leaf "b")) (Node "f" (Leaf "c") (Leaf "d"))
+main = mainWith (unlabeledTree (parseString "((((a,b),c),(d,e)),(f,g))") :: Diagram B)
