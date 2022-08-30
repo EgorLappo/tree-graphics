@@ -2,4 +2,4 @@
 
 This project contains some code to simplify the graphics creation process for my papers in phylogenetics and combinatorics. 
 
-This is a work in progress!
+This is a work in progress! Usage guide and explanations are coming soon.
