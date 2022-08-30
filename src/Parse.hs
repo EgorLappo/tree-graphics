@@ -1,6 +1,3 @@
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
-{-# LANGUAGE LambdaCase #-}
-{-# OPTIONS_GHC -Wno-unused-do-bind #-}
 module Parse where
 
 import Control.Applicative ( Alternative((<|>), empty, some) )

@@ -3,7 +3,14 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: diagrams-pgf-1.4.2@sha256:d7ce2197cb24f9f802395f260250ba5484ab0237e8354bb76cfb661873a26e93,2068
+    pantry-tree:
+      size: 703
+      sha256: 1d4082cbb4f8e010b6fad164ff97f086bc41b081b77c69bd9938ba34525da8cf
+  original:
+    hackage: diagrams-pgf-1.4.2
 snapshots:
 - completed:
     size: 619173

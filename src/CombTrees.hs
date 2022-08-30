@@ -1,17 +1,14 @@
-{-# LANGUAGE NoMonomorphismRestriction #-}
-{-# LANGUAGE FlexibleContexts          #-}
-{-# LANGUAGE TypeFamilies              #-}
-
 module CombTrees (unlabeledTree) where
 
 import Control.Monad
 import Diagrams.Prelude
+import Diagrams.Backend.SVG.CmdLine
 
 import Types
 
 
 -- *** DRAWING UNLABELED TOPOLOGIES ***
-unlabeledTree :: Renderable (Path V2 Double) b => Tree a -> QDiagram b V2 Double Any
+unlabeledTree :: Tree a -> Diagram B
 unlabeledTree =  strokePath . makeUnlabeledTree (0 ^& 0)
 
 makeUnlabeledTree :: P2 Double -- the location (in global coordinates) at which we start drawing
@@ -48,19 +45,39 @@ treeLeafCount (Leaf _) = 1
 treeLeafCount (Node _ l r) = treeLeafCount l + treeLeafCount r
 
 -- *** ADDING LABELS *** 
-labeledTree :: Renderable (Path V2 Double) b =>
-    (LabTree -> QDiagram b V2 Double Any) -> -- the formatter for the leaf noeds
-    (LabTree -> QDiagram b V2 Double Any) -> -- the formatter for the internal nodes
-    LabTree ->                               -- the tree that we are drawing
-    QDiagram b V2 Double Any                 -- the resulting tree
+labeledTree' :: (String -> Diagram B)          -- the formatter for the leaf noeds
+             -> (Nudge -> String -> Diagram B) -- the formatter for the internal nodes
+             -> LabTree                        -- the tree that we are drawing
+             -> Diagram B                      -- the resulting tree
 -- labeledTree leafFmt nodeFmt t = unlabeledTree t `atop` position (treeLabels leafFmt nodeFmt t)
-labeledTree leafFmt nodeFmt = liftM2 atop unlabeledTree (position . treeLabels leafFmt nodeFmt)
+labeledTree' leafFmt nodeFmt = liftM2 atop unlabeledTree (position . treeLabels L leafFmt nodeFmt (0 ^& 0))
 
-treeLabels :: Renderable (Path V2 Double) b =>
-    (LabTree -> QDiagram b V2 Double Any) -> -- the formatter for the leaf noeds
-    (LabTree -> QDiagram b V2 Double Any) -> -- the formatter for the internal nodes
-    LabTree ->                               -- the tree that we are labeling
-    [(P2 Double, QDiagram b V2 Double Any)]  -- the resulting positioned labels
-treeLabels t leafFmt nodeFmt = undefined
+treeLabels :: Nudge                          -- the correct location of the label relative to the node      
+           -> (String -> Diagram B)          -- the formatter for the leaf noeds
+           -> (Nudge -> String -> Diagram B) -- the formatter for the internal nodes
+           -> P2 Double                      -- the current location
+           -> LabTree                        -- the tree that we are labeling
+           -> [(P2 Double, Diagram B)]       -- the resulting positioned labels
+treeLabels _ leafFmt _ pos (Leaf s) = [(pos, leafFmt s)]
+treeLabels n leafFmt nodeFmt pos t@(Node s l r) =
+    [(pos, nodeFmt n s)] <>
+    treeLabels L leafFmt nodeFmt leftChildPos  l <>
+    treeLabels R leafFmt nodeFmt rightChildPos r
+  where
+    (lOff, rOff) = (subtreeOffsets . subtreeLeafCounts) t
+    leftChildPos  = pos .+^ lOff
+    rightChildPos = pos .+^ rOff
 
+-- a simple type to remember whether to move the label to the left or to the right
+data Nudge = L | R deriving (Eq, Show)
 
+-- *** NODE DATA FORMATTERS ***
+empty :: Nudge -> String -> Diagram B
+empty _ _ = strokeLine emptyLine
+
+nodeLabel :: Nudge -> String -> Diagram B
+nodeLabel L = alignedText 1.0 0.0
+nodeLabel R = alignedText 0.0 0.0
+
+leafLabel :: String -> Diagram B
+leafLabel = alignedText 0.5 1.0
