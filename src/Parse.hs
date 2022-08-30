@@ -27,7 +27,9 @@ parseString = fst . head . parse tree . nameInternalNodes 1
 -- i don't need more complicated stuff for now
 -- possible future update is to automatically detect unlabeled nodes
 
-newtype Parser a = P (String -> [(a, String)])
+-- essentially, it's MaybeT of State, but using lists 
+-- is simpler than unwrapping maybes
+newtype Parser a = P (String -> [(a, String)]) 
 
 parse :: Parser a -> String -> [(a, String)]
 parse (P p) = p
