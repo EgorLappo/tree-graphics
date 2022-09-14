@@ -2,14 +2,12 @@ module CombTrees (unlabeledTree, labeledTree, leafLabeledTree, debugTree) where
 
 import Control.Monad
 import Diagrams.Prelude
-import Diagrams.Backend.SVG.CmdLine
---- import Diagrams.Backend.PGF.CmdLine
 
 import Types
 
 
 -- *** DRAWING UNLABELED TOPOLOGIES ***
-unlabeledTree :: Tree a -> Diagram B
+unlabeledTree :: _ => Tree a -> QDiagram b V2 Double Any
 unlabeledTree = lineCap LineCapRound
               . lw 5
               . strokePath
@@ -49,28 +47,28 @@ treeLeafCount (Leaf _) = 1
 treeLeafCount (Node _ l r) = treeLeafCount l + treeLeafCount r
 
 -- *** ADDING LABELS *** 
-leafLabeledTree :: LabTree -> Diagram B
+leafLabeledTree :: _ => LabTree ->  QDiagram b V2 Double Any
 leafLabeledTree = frameTree . (labeledTree' leafLabel empty)
 
-labeledTree :: LabTree -> Diagram B
+labeledTree :: _ => LabTree -> QDiagram b V2 Double Any
 labeledTree = frameTree . (labeledTree' leafLabel nodeLabel)
 
-debugTree :: LabTree -> Diagram B
+debugTree :: _ => LabTree ->  QDiagram b V2 Double Any
 debugTree = frameTree . (labeledTree' (\_ -> pt) (\_ _ -> pt))
 
-labeledTree' :: (String -> Diagram B)          -- the formatter for the leaf noeds
-             -> (Nudge -> String -> Diagram B) -- the formatter for the internal nodes
+labeledTree' :: _ => (String ->  QDiagram b V2 Double Any)          -- the formatter for the leaf noeds
+             -> (Nudge -> String ->  QDiagram b V2 Double Any) -- the formatter for the internal nodes
              -> LabTree                        -- the tree that we are drawing
-             -> Diagram B                      -- the resulting tree
+             -> QDiagram b V2 Double Any                     -- the resulting tree
 -- labeledTree leafFmt nodeFmt t = unlabeledTree t `atop` position (treeLabels leafFmt nodeFmt t)
 labeledTree' leafFmt nodeFmt = liftM2 atop (position . treeLabels L leafFmt nodeFmt (0 ^& 0)) unlabeledTree
 
-treeLabels :: Nudge                          -- the correct location of the label relative to the node      
-           -> (String -> Diagram B)          -- the formatter for the leaf noeds
-           -> (Nudge -> String -> Diagram B) -- the formatter for the internal nodes
+treeLabels :: _ => Nudge                          -- the correct location of the label relative to the node      
+           -> (String -> QDiagram b V2 Double Any)          -- the formatter for the leaf noeds
+           -> (Nudge -> String -> QDiagram b V2 Double Any) -- the formatter for the internal nodes
            -> P2 Double                      -- the current location
            -> LabTree                        -- the tree that we are labeling
-           -> [(P2 Double, Diagram B)]       -- the resulting positioned labels
+           -> [(P2 Double, QDiagram b V2 Double Any)]       -- the resulting positioned labels
 treeLabels _ leafFmt _ pos (Leaf s) = [(pos, leafFmt s)]
 treeLabels n leafFmt nodeFmt pos t@(Node s l r) =
     [(pos, nodeFmt n s)] <>
@@ -88,30 +86,30 @@ data Nudge = L | R deriving (Eq, Show)
 -- mostly we would want just simple text functions
 -- however, it's also possible to add any sort of customization here:
 -- padding, spacing, circles to denote nodes, some sort of extra lines, etc.
-empty :: Nudge -> String -> Diagram B
+empty :: _ => Nudge -> String -> QDiagram b V2 Double Any
 empty _ _ = strokeLine emptyLine
 
-nodeLabel :: Nudge -> String -> Diagram B
+nodeLabel :: _ => Nudge -> String -> QDiagram b V2 Double Any
 nodeLabel L = (nudgeNodeLabel L) . setLabelSize . alignedText 1.0 0.0 
 nodeLabel R = (nudgeNodeLabel R) . setLabelSize . alignedText 0.0 0.0
  
-leafLabel :: String -> Diagram B
+leafLabel :: _ => String -> QDiagram b V2 Double Any
 leafLabel = nudgeLeafLabel . setLabelSize .baselineText 
 
-pt :: Diagram B
+pt :: _ => QDiagram b V2 Double Any
 pt = circle 0.1 # fc red # lw 1
 
 --- *** HELPERS ***
 
-nudgeNodeLabel :: Nudge -> Diagram B -> Diagram B
+nudgeNodeLabel :: Nudge -> QDiagram b V2 Double Any -> QDiagram b V2 Double Any
 nudgeNodeLabel L = translate ((-0.2) ^& 0.3)
 nudgeNodeLabel R = translate (0.2 ^& 0.3)
 
-nudgeLeafLabel :: Diagram B -> Diagram B
+nudgeLeafLabel :: QDiagram b V2 Double Any -> QDiagram b V2 Double Any
 nudgeLeafLabel = translate ((-0.3) ^& (-1.3))
 
-setLabelSize :: Diagram B -> Diagram B
+setLabelSize :: QDiagram b V2 Double Any -> QDiagram b V2 Double Any
 setLabelSize = fontSizeL 0.9
 
-frameTree :: Diagram B -> Diagram B
+frameTree :: QDiagram b V2 Double Any -> QDiagram b V2 Double Any
 frameTree = frame 2 . centerXY
