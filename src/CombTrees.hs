@@ -1,4 +1,4 @@
-module CombTrees (unlabeledTree) where
+module CombTrees (unlabeledTree, labeledTree, leafLabeledTree, debugTree) where
 
 import Control.Monad
 import Diagrams.Prelude
@@ -9,7 +9,10 @@ import Types
 
 -- *** DRAWING UNLABELED TOPOLOGIES ***
 unlabeledTree :: Tree a -> Diagram B
-unlabeledTree =  strokePath . makeUnlabeledTree (0 ^& 0)
+unlabeledTree = lineCap LineCapRound
+              . lw 6
+              . strokePath
+              . makeUnlabeledTree (0 ^& 0) 
 
 makeUnlabeledTree :: P2 Double -- the location (in global coordinates) at which we start drawing
                   -> Tree a -- the tree node which we are drawing right now
@@ -45,15 +48,21 @@ treeLeafCount (Leaf _) = 1
 treeLeafCount (Node _ l r) = treeLeafCount l + treeLeafCount r
 
 -- *** ADDING LABELS *** 
-leafLabeledTree = labeledTree' empty leafLabel
-labeledTree = labeledTree' nodeLabel leafLabel
+leafLabeledTree :: LabTree -> Diagram B
+leafLabeledTree = frameTree . (labeledTree' leafLabel empty)
+
+labeledTree :: LabTree -> Diagram B
+labeledTree = frameTree . (labeledTree' leafLabel nodeLabel)
+
+debugTree :: LabTree -> Diagram B
+debugTree = frameTree . (labeledTree' (\_ -> pt) (\_ _ -> pt))
 
 labeledTree' :: (String -> Diagram B)          -- the formatter for the leaf noeds
              -> (Nudge -> String -> Diagram B) -- the formatter for the internal nodes
              -> LabTree                        -- the tree that we are drawing
              -> Diagram B                      -- the resulting tree
 -- labeledTree leafFmt nodeFmt t = unlabeledTree t `atop` position (treeLabels leafFmt nodeFmt t)
-labeledTree' leafFmt nodeFmt = liftM2 atop unlabeledTree (position . treeLabels L leafFmt nodeFmt (0 ^& 0))
+labeledTree' leafFmt nodeFmt = liftM2 atop (position . treeLabels L leafFmt nodeFmt (0 ^& 0)) unlabeledTree
 
 treeLabels :: Nudge                          -- the correct location of the label relative to the node      
            -> (String -> Diagram B)          -- the formatter for the leaf noeds
@@ -75,15 +84,25 @@ treeLabels n leafFmt nodeFmt pos t@(Node s l r) =
 data Nudge = L | R deriving (Eq, Show)
 
 -- *** NODE DATA FORMATTERS ***
--- so far these are just simple text functions
+-- mostly we would want just simple text functions
 -- however, it's also possible to add any sort of customization here:
 -- padding, spacing, circles to denote nodes, some sort of extra lines, etc.
 empty :: Nudge -> String -> Diagram B
 empty _ _ = strokeLine emptyLine
 
 nodeLabel :: Nudge -> String -> Diagram B
-nodeLabel L = alignedText 1.0 0.0
-nodeLabel R = alignedText 0.0 0.0
-
+nodeLabel L = (nudgeLabel L) . alignedText 1.0 0.0 
+nodeLabel R = (nudgeLabel R) . alignedText 0.0 0.0
+ 
 leafLabel :: String -> Diagram B
 leafLabel = alignedText 0.5 1.0
+
+pt :: Diagram B
+pt = circle 0.1 # fc red # lw 1
+
+nudgeLabel :: Nudge -> Diagram B -> Diagram B
+nudgeLabel L = translate ((-0.2) ^& 0.3)
+nudgeLabel R = translate (0.2 ^& 0.3)
+
+frameTree :: Diagram B -> Diagram B
+frameTree = frame 2 . centerXY
