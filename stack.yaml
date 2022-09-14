@@ -37,6 +37,7 @@ packages:
 #
 extra-deps:
 - diagrams-pgf-1.4.2
+- texrunner-0.0.1.2@sha256:fd67a3f946afa3c23179b1fce0ee43b3348f9ee134109996a526429331226d8f,1909
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

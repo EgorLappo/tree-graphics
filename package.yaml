@@ -22,6 +22,7 @@ dependencies:
 - base >= 4.7 && < 5
 - diagrams-lib
 - diagrams-svg
+- diagrams-pgf
 
 ghc-options:
 - -Wall
@@ -42,6 +43,7 @@ library:
     - FlexibleContexts
     - TypeFamilies
     - LambdaCase
+    - PartialTypeSignatures
 
 executables:
   treegraphics-exe:
@@ -56,6 +58,7 @@ executables:
       - FlexibleContexts
       - TypeFamilies
       - LambdaCase
+      - PartialTypeSignatures
     dependencies:
     - treegraphics
 

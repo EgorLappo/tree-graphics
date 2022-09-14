@@ -36,10 +36,12 @@ library
       FlexibleContexts
       TypeFamilies
       LambdaCase
+      PartialTypeSignatures
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wno-incomplete-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-unused-do-bind
   build-depends:
       base >=4.7 && <5
     , diagrams-lib
+    , diagrams-pgf
     , diagrams-svg
   default-language: Haskell2010
 
@@ -54,10 +56,12 @@ executable treegraphics-exe
       FlexibleContexts
       TypeFamilies
       LambdaCase
+      PartialTypeSignatures
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wno-incomplete-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-unused-do-bind -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
     , diagrams-lib
+    , diagrams-pgf
     , diagrams-svg
     , treegraphics
   default-language: Haskell2010

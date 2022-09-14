@@ -3,6 +3,7 @@ module CombTrees (unlabeledTree, labeledTree, leafLabeledTree, debugTree) where
 import Control.Monad
 import Diagrams.Prelude
 import Diagrams.Backend.SVG.CmdLine
+--- import Diagrams.Backend.PGF.CmdLine
 
 import Types
 
@@ -10,7 +11,7 @@ import Types
 -- *** DRAWING UNLABELED TOPOLOGIES ***
 unlabeledTree :: Tree a -> Diagram B
 unlabeledTree = lineCap LineCapRound
-              . lw 6
+              . lw 5
               . strokePath
               . makeUnlabeledTree (0 ^& 0) 
 
@@ -91,18 +92,26 @@ empty :: Nudge -> String -> Diagram B
 empty _ _ = strokeLine emptyLine
 
 nodeLabel :: Nudge -> String -> Diagram B
-nodeLabel L = (nudgeLabel L) . alignedText 1.0 0.0 
-nodeLabel R = (nudgeLabel R) . alignedText 0.0 0.0
+nodeLabel L = (nudgeNodeLabel L) . setLabelSize . alignedText 1.0 0.0 
+nodeLabel R = (nudgeNodeLabel R) . setLabelSize . alignedText 0.0 0.0
  
 leafLabel :: String -> Diagram B
-leafLabel = alignedText 0.5 1.0
+leafLabel = nudgeLeafLabel . setLabelSize .baselineText 
 
 pt :: Diagram B
 pt = circle 0.1 # fc red # lw 1
 
-nudgeLabel :: Nudge -> Diagram B -> Diagram B
-nudgeLabel L = translate ((-0.2) ^& 0.3)
-nudgeLabel R = translate (0.2 ^& 0.3)
+--- *** HELPERS ***
+
+nudgeNodeLabel :: Nudge -> Diagram B -> Diagram B
+nudgeNodeLabel L = translate ((-0.2) ^& 0.3)
+nudgeNodeLabel R = translate (0.2 ^& 0.3)
+
+nudgeLeafLabel :: Diagram B -> Diagram B
+nudgeLeafLabel = translate ((-0.3) ^& (-1.3))
+
+setLabelSize :: Diagram B -> Diagram B
+setLabelSize = fontSizeL 0.9
 
 frameTree :: Diagram B -> Diagram B
 frameTree = frame 2 . centerXY

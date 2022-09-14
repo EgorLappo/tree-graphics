@@ -2,7 +2,7 @@ module Parse where
 
 import Control.Applicative ( Alternative((<|>), empty, some) )
 import Data.Char ( isAlphaNum )
-import Types ( Tree(..) )
+import Types ( Tree(..))
 
 placeholderLabel :: String
 placeholderLabel = "xx"
@@ -19,6 +19,9 @@ nameInternalNodes i (x:y:xs) | x == ')' = if (y == ',') || (y == ')')
 -- parse the Newick string into a Tree
 parseString :: String -> Tree String
 parseString = fst . head . parse tree . nameInternalNodes 1
+
+latexize :: Tree String -> Tree String
+latexize = fmap (\label -> "$" ++ label ++ "$")
 
 -- the parser code is straight from the Hutton textbook
 -- i don't need more complicated stuff for now
