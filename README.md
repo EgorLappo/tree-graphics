@@ -12,8 +12,9 @@ To install the program, make sure you have a Haskell toolchain on your computer,
 Here is the help message for the program:
 
 ```
-treegraphics - a script to draw trees for use in mathematical phylogenetics
-papers
+treegraphics 0.1.0
+Egor Lappo, egor@ccrma.stanford.edu
+A script to draw trees for use in mathematical phylogenetics papers.
 
 Usage: treegraphics-exe [-b|--backend BACKEND] [-l|--label LABELS] 
                         [-w|--width WIDTH] (-i|--input INPUTFILE)
@@ -23,13 +24,14 @@ Usage: treegraphics-exe [-b|--backend BACKEND] [-l|--label LABELS]
 Available options:
   -b,--backend BACKEND     Choice of rendering backend, with SVG and PGF
                            supported. The argument should be either 'svg' or
-                           'pgf', case-insensitive.
+                           'pgf', case-insensitive. Default value is 'SVG'.
   -l,--label LABELS        Labeling of the tree, with unlabeled, leaf-labeled,
                            and fully labeled trees supported. The argument
                            should be either of 'labeled', 'leaflabeled', or
                            'unlabeled', case-insensitive. Short options 'l',
-                           'll', and 'ul' also available.
-  -w,--width WIDTH         Diagram width.
+                           'll', and 'ul' also available. Default value is
+                           'unlabeled'.
+  -w,--width WIDTH         Diagram width. Default value is 400.
   -i,--input INPUTFILE     Input file, containing a single tree on each line.
   -o,--output OUTPUTFILES  Format for output files, written as 'tree%.svg' where
                            percent sign will be replaced by the number of the

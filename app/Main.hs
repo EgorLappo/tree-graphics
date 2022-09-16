@@ -13,6 +13,7 @@ import qualified Diagrams.Backend.PGF as PGFB
 
 import CombTrees ( unlabeledTree, labeledTree, leafLabeledTree )
 import Parse ( parseString, latexize )
+import Text.PrettyPrint.ANSI.Leijen (text)
 
 
 data Backend = SVG | PGF deriving (Eq, Show, Read)
@@ -84,7 +85,7 @@ cli :: ParserInfo AppOptions
 cli = info (cliArgs <**> helper)
            (  fullDesc
            <> progDesc "Draw trees from a file containing Newick strings"
-           <> header "treegraphics - a script to draw trees for use in mathematical phylogenetics papers" )
+           <> headerDoc (Just $ text "treegraphics 0.1.0\nEgor Lappo, egor@ccrma.stanford.edu\nA script to draw trees for use in mathematical phylogenetics papers.") )
 
 readBackend :: String -> Either String Backend
 readBackend s = case map toLower s of

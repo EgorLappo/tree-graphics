@@ -25,6 +25,7 @@ dependencies:
 - diagrams-pgf
 - optparse-applicative
 - split
+- ansi-wl-pprint
 
 ghc-options:
 - -Wall
