@@ -6,6 +6,9 @@ This project contains some code to simplify the graphics creation process for my
 
 ## Usage
 
+To install the program, make sure you have a Haskell toolchain on your computer, including Stack. Then, in the root directory of the project, run
+`stack install --local-bin-path .` to compile an executable and move it to the root of the project.
+
 Here is the help message for the program:
 
 ```
@@ -37,3 +40,15 @@ Available options:
 Trees are encoded in a simplified Newick format, like this: `"((a,b),c)"`. Internal node labels are optional, but please provide them if you want to draw fully-labeled trees. Internal nodes are labeled by a string following the closing paren of the node, like this: `"((a,b)d,c)e"`.
 
 The input file should be a text file with a single tree on each line. Each diagram would be rendered into a separate output file. The format for output files is simple: define the desired file path as you would regularly, but add a `'%'` character to mark a place to insert a number. 
+
+## Examples
+
+After installing, try running
+
+`./treegraphics-exe -b PGF -l ul -i input.txt -o output/tree%.pgf`
+
+or 
+
+`./treegraphics-exe -b SVG -l ul -i input.txt -o output/tree%.svg`
+
+to generate example trees.
