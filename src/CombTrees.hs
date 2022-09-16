@@ -1,9 +1,9 @@
 module CombTrees (unlabeledTree, labeledTree, leafLabeledTree, debugTree) where
 
-import Control.Monad
+import Control.Monad ( liftM2 )
 import Diagrams.Prelude
 
-import Types
+import Types ( LabTree, Tree(..) )
 
 
 -- *** DRAWING UNLABELED TOPOLOGIES ***
@@ -11,7 +11,7 @@ unlabeledTree :: _ => Tree a -> QDiagram b V2 Double Any
 unlabeledTree = lineCap LineCapRound
               . lw 5
               . strokePath
-              . makeUnlabeledTree (0 ^& 0) 
+              . makeUnlabeledTree (0 ^& 0)
 
 makeUnlabeledTree :: P2 Double -- the location (in global coordinates) at which we start drawing
                   -> Tree a -- the tree node which we are drawing right now
@@ -48,13 +48,13 @@ treeLeafCount (Node _ l r) = treeLeafCount l + treeLeafCount r
 
 -- *** ADDING LABELS *** 
 leafLabeledTree :: _ => LabTree ->  QDiagram b V2 Double Any
-leafLabeledTree = frameTree . (labeledTree' leafLabel empty)
+leafLabeledTree = frameTree . labeledTree' leafLabel empty
 
 labeledTree :: _ => LabTree -> QDiagram b V2 Double Any
-labeledTree = frameTree . (labeledTree' leafLabel nodeLabel)
+labeledTree = frameTree . labeledTree' leafLabel nodeLabel
 
 debugTree :: _ => LabTree ->  QDiagram b V2 Double Any
-debugTree = frameTree . (labeledTree' (\_ -> pt) (\_ _ -> pt))
+debugTree = frameTree . labeledTree' (const pt) (\_ _ -> pt)
 
 labeledTree' :: _ => (String ->  QDiagram b V2 Double Any)          -- the formatter for the leaf noeds
              -> (Nudge -> String ->  QDiagram b V2 Double Any) -- the formatter for the internal nodes
@@ -90,11 +90,11 @@ empty :: _ => Nudge -> String -> QDiagram b V2 Double Any
 empty _ _ = strokeLine emptyLine
 
 nodeLabel :: _ => Nudge -> String -> QDiagram b V2 Double Any
-nodeLabel L = (nudgeNodeLabel L) . setLabelSize . alignedText 1.0 0.0 
-nodeLabel R = (nudgeNodeLabel R) . setLabelSize . alignedText 0.0 0.0
- 
+nodeLabel L = nudgeNodeLabel L . setLabelSize . alignedText 1.0 0.0
+nodeLabel R = nudgeNodeLabel R . setLabelSize . alignedText 0.0 0.0
+
 leafLabel :: _ => String -> QDiagram b V2 Double Any
-leafLabel = nudgeLeafLabel . setLabelSize .baselineText 
+leafLabel = nudgeLeafLabel . setLabelSize .baselineText
 
 pt :: _ => QDiagram b V2 Double Any
 pt = circle 0.1 # fc red # lw 1

@@ -1,4 +1,6 @@
-module Parse where
+{-# OPTIONS_GHC -fno-warn-incomplete-patterns #-}
+
+module Parse (parseString, latexize) where
 
 import Control.Applicative ( Alternative((<|>), empty, some) )
 import Data.Char ( isAlphaNum )

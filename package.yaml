@@ -23,6 +23,8 @@ dependencies:
 - diagrams-lib
 - diagrams-svg
 - diagrams-pgf
+- optparse-applicative
+- lens
 
 ghc-options:
 - -Wall
@@ -45,6 +47,7 @@ library:
     - TypeFamilies
     - LambdaCase
     - PartialTypeSignatures
+    - TemplateHaskell
 
 executables:
   treegraphics-exe:
@@ -60,6 +63,7 @@ executables:
       - TypeFamilies
       - LambdaCase
       - PartialTypeSignatures
+      - TemplateHaskell
     dependencies:
     - treegraphics
 

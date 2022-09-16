@@ -37,12 +37,15 @@ library
       TypeFamilies
       LambdaCase
       PartialTypeSignatures
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wno-incomplete-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-unused-do-bind
+      TemplateHaskell
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wno-incomplete-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-unused-do-bind -fno-warn-partial-type-signatures
   build-depends:
       base >=4.7 && <5
     , diagrams-lib
     , diagrams-pgf
     , diagrams-svg
+    , lens
+    , optparse-applicative
   default-language: Haskell2010
 
 executable treegraphics-exe
@@ -57,11 +60,14 @@ executable treegraphics-exe
       TypeFamilies
       LambdaCase
       PartialTypeSignatures
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wno-incomplete-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-unused-do-bind -threaded -rtsopts -with-rtsopts=-N
+      TemplateHaskell
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wno-incomplete-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-unused-do-bind -fno-warn-partial-type-signatures -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
     , diagrams-lib
     , diagrams-pgf
     , diagrams-svg
+    , lens
+    , optparse-applicative
     , treegraphics
   default-language: Haskell2010
