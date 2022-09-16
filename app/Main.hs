@@ -60,17 +60,17 @@ cliArgs = AppOptions
                     <> short 'b'
                     <> metavar "BACKEND"
                     <> value "SVG"
-                    <> help "Choice of rendering backend, with SVG and PGF supported. The argument should be either 'svg' or 'pgf', case-insensitive." )
+                    <> help "Choice of rendering backend, with SVG and PGF supported. The argument should be either 'svg' or 'pgf', case-insensitive. Default value is 'SVG'." )
     <*> strOption (  long "label"
                     <> short 'l'
                     <> metavar "LABELS"
                     <> value "unlabeled"
-                    <> help "Labeling of the tree, with unlabeled, leaf-labeled, and fully labeled trees supported. The argument should be either of 'labeled', 'leaflabeled', or 'unlabeled', case-insensitive. Short options 'l', 'll', and 'ul' also available." )
+                    <> help "Labeling of the tree, with unlabeled, leaf-labeled, and fully labeled trees supported. The argument should be either of 'labeled', 'leaflabeled', or 'unlabeled', case-insensitive. Short options 'l', 'll', and 'ul' also available. Default value is 'unlabeled'." )
     <*> option auto (  long "width"
                     <> short 'w'
                     <> metavar "WIDTH"
                     <> value 400
-                    <> help "Diagram width." )
+                    <> help "Diagram width. Default value is 400." )
     <*> strOption   (  long "input"
                     <> short 'i'
                     <> metavar "INPUTFILE"
