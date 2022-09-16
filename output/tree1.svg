@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+    "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg stroke="rgb(0,0,0)" xmlns="http://www.w3.org/2000/svg" font-size="1" width="400.0000" stroke-opacity="1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0.0 0.0 399.99999999999994 356.0975609756097" height="356.0976" version="1.1">
+  <defs>
+  </defs>
+  <g fill="rgb(0,0,0)" stroke="rgb(0,0,0)" stroke-linecap="round" stroke-width="5.0" stroke-miterlimit="10.0" fill-opacity="0.0" stroke-opacity="1.0" stroke-linejoin="miter">
+    <path d="M 156.0976,146.3415 l 48.7805,-48.7805 l 97.5610,97.5610 M 107.3171,195.1220 l 48.7805,-48.7805 l 48.7805,48.7805 M 107.3171,195.1220 M 204.8780,195.1220 M 302.4390,195.1220 "/>
+  </g>
+  <g fill="rgb(0,0,0)" stroke="rgb(0,0,0)" stroke-linecap="butt" stroke-width="1.509643795815391" font-size="43.90243902439025px" stroke-miterlimit="10.0" fill-opacity="1.0" stroke-opacity="1.0" stroke-linejoin="miter">
+    <text dominant-baseline="alphabetic" stroke="none" transform="matrix(1.0000,0.0000,0.0000,1.0000,292.6829,258.5366)" text-anchor="start">c
+    </text>
+  </g>
+  <g fill="rgb(0,0,0)" stroke="rgb(0,0,0)" stroke-linecap="butt" stroke-width="1.509643795815391" font-size="43.90243902439025px" stroke-miterlimit="10.0" fill-opacity="1.0" stroke-opacity="1.0" stroke-linejoin="miter">
+    <text dominant-baseline="alphabetic" stroke="none" transform="matrix(1.0000,0.0000,0.0000,1.0000,195.1220,258.5366)" text-anchor="start">b
+    </text>
+  </g>
+  <g fill="rgb(0,0,0)" stroke="rgb(0,0,0)" stroke-linecap="butt" stroke-width="1.509643795815391" font-size="43.90243902439025px" stroke-miterlimit="10.0" fill-opacity="1.0" stroke-opacity="1.0" stroke-linejoin="miter">
+    <text dominant-baseline="alphabetic" stroke="none" transform="matrix(1.0000,0.0000,0.0000,1.0000,97.5610,258.5366)" text-anchor="start">a
+    </text>
+  </g>
+  <g fill="rgb(0,0,0)" stroke="rgb(0,0,0)" stroke-linecap="butt" stroke-width="1.509643795815391" stroke-miterlimit="10.0" fill-opacity="0.0" stroke-opacity="1.0" stroke-linejoin="miter">
+    <path d="M 156.0976,146.3415 "/>
+  </g>
+  <g fill="rgb(0,0,0)" stroke="rgb(0,0,0)" stroke-linecap="butt" stroke-width="1.509643795815391" stroke-miterlimit="10.0" fill-opacity="0.0" stroke-opacity="1.0" stroke-linejoin="miter">
+    <path d="M 204.8780,97.5610 "/>
+  </g>
+</svg>

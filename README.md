@@ -19,17 +19,18 @@ Usage: treegraphics-exe [-b|--backend BACKEND] [-l|--label LABELS]
 
 Available options:
   -b,--backend BACKEND     Choice of rendering backend, with SVG and PGF
-                           supported
+                           supported. The argument should be either 'svg' or
+                           'pgf', case-insensitive.
   -l,--label LABELS        Labeling of the tree, with unlabeled, leaf-labeled,
                            and fully labeled trees supported. The argument
                            should be either of 'labeled', 'leaflabeled', or
-                           'unlabeled', with short options 'l', 'll', and 'ul'
-                           also available.
-  -w,--width WIDTH         Diagram width
-  -i,--input INPUTFILE     Input file, containing a single tree on each line
+                           'unlabeled', case-insensitive. Short options 'l',
+                           'll', and 'ul' also available.
+  -w,--width WIDTH         Diagram width.
+  -i,--input INPUTFILE     Input file, containing a single tree on each line.
   -o,--output OUTPUTFILES  Format for output files, written as 'tree%.svg' where
                            percent sign will be replaced by the number of the
-                           tree in the input file
+                           tree in the input file.
   -h,--help                Show this help text
 ```
 

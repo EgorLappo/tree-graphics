@@ -1,0 +1,29 @@
+\begin{pgfpicture}
+  \pgfpathrectangle{\pgfpointorigin}{\pgfqpoint{400.0000bp}{200.0000bp}}
+  \pgfusepath{use as bounding box}
+  \begin{pgfscope}
+    \pgfsetlinewidth{5.0000bp}
+    \definecolor{sc}{rgb}{0.0000,0.0000,0.0000}
+    \pgfsetstrokecolor{sc}
+    \pgfsetmiterjoin
+    \pgfsetroundcap
+    \pgfpathqmoveto{150.0000bp}{150.0000bp}
+    \pgfpathqlineto{200.0000bp}{200.0000bp}
+    \pgfpathqlineto{400.0000bp}{0.0000bp}
+    \pgfpathqmoveto{100.0000bp}{100.0000bp}
+    \pgfpathqlineto{150.0000bp}{150.0000bp}
+    \pgfpathqlineto{300.0000bp}{0.0000bp}
+    \pgfpathqmoveto{50.0000bp}{50.0000bp}
+    \pgfpathqlineto{100.0000bp}{100.0000bp}
+    \pgfpathqlineto{200.0000bp}{0.0000bp}
+    \pgfpathqmoveto{0.0000bp}{0.0000bp}
+    \pgfpathqlineto{50.0000bp}{50.0000bp}
+    \pgfpathqlineto{100.0000bp}{0.0000bp}
+    \pgfpathqmoveto{0.0000bp}{0.0000bp}
+    \pgfpathqmoveto{100.0000bp}{0.0000bp}
+    \pgfpathqmoveto{200.0000bp}{0.0000bp}
+    \pgfpathqmoveto{300.0000bp}{0.0000bp}
+    \pgfpathqmoveto{400.0000bp}{0.0000bp}
+    \pgfusepathqstroke
+  \end{pgfscope}
+\end{pgfpicture}

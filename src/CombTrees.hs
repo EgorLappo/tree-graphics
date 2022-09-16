@@ -94,7 +94,7 @@ nodeLabel L = nudgeNodeLabel L . setLabelSize . alignedText 1.0 0.0
 nodeLabel R = nudgeNodeLabel R . setLabelSize . alignedText 0.0 0.0
 
 leafLabel :: _ => String -> QDiagram b V2 Double Any
-leafLabel = nudgeLeafLabel . setLabelSize .baselineText
+leafLabel = nudgeLeafLabel . setLabelSize . baselineText
 
 pt :: _ => QDiagram b V2 Double Any
 pt = circle 0.1 # fc red # lw 1
@@ -106,7 +106,7 @@ nudgeNodeLabel L = translate ((-0.2) ^& 0.3)
 nudgeNodeLabel R = translate (0.2 ^& 0.3)
 
 nudgeLeafLabel :: QDiagram b V2 Double Any -> QDiagram b V2 Double Any
-nudgeLeafLabel = translate ((-0.3) ^& (-1.3))
+nudgeLeafLabel = translate ((-0.2) ^& (-1.3))
 
 setLabelSize :: QDiagram b V2 Double Any -> QDiagram b V2 Double Any
 setLabelSize = fontSizeL 0.9

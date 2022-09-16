@@ -90,7 +90,7 @@ readBackend :: String -> Either String Backend
 readBackend s = case map toLower s of
     "svg" -> Right SVG
     "pgf" -> Right PGF
-    _     -> Left $ "The backend you requested is not available " ++ s
+    _     -> Left $ "The backend you requested is not available: " ++ s
 
 readLabel :: String -> Either String Label
 readLabel s = case map toLower s of
@@ -100,7 +100,7 @@ readLabel s = case map toLower s of
     "l"           -> Right Labeled
     "leaflabeled" -> Right LeafLabeled
     "ll"          -> Right LeafLabeled
-    _             -> Left $ "The labeling you requested is not available " ++ s
+    _             -> Left $ "The labeling you requested is not available: " ++ s
 
 readOutputFormat :: String -> Either String (Int -> String)
 readOutputFormat s
@@ -112,6 +112,6 @@ readOutputFormat s
 -- I think anything like ExceptT is too much for me, so here is a simple helper function
 -- if we have Left, just print the left side,
 -- if we have Right, run the action given by the second argument
-eitherSplit :: Show a => Either a b -> (b -> IO ()) -> IO ()
-eitherSplit (Left a) _ = print a
+eitherSplit :: Either String b -> (b -> IO ()) -> IO ()
+eitherSplit (Left a) _ = putStrLn a
 eitherSplit (Right b) f = f b
