@@ -6,7 +6,7 @@ This project contains some code to simplify the graphics creation process for my
 
 ## Usage
 
-To install the program, make sure you have a Haskell toolchain on your computer, including Stack. Then, in the root directory of the project, run
+To install the program, make sure you have a [Haskell toolchain](https://www.haskell.org/ghcup/) on your computer, including Stack. Then, in the root directory of the project, run
 `stack install --local-bin-path .` to compile an executable and move it to the root of the project.
 
 Here is the help message for the program:
