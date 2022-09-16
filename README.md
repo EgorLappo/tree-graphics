@@ -47,10 +47,10 @@ The input file should be a text file with a single tree on each line. Each diagr
 
 After installing, try running
 
-`./treegraphics-exe -b PGF -l ul -i input.txt -o output/tree%.pgf`
+`./treegraphics-exe -b PGF -i input.txt -o output/tree%.pgf`
 
 or 
 
-`./treegraphics-exe -b SVG -l ul -i input.txt -o output/tree%.svg`
+`./treegraphics-exe -b SVG -l ll -i input.txt -o output/tree%.svg`
 
 to generate example trees.
