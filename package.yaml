@@ -24,7 +24,7 @@ dependencies:
 - diagrams-svg
 - diagrams-pgf
 - optparse-applicative
-- lens
+- split
 
 ghc-options:
 - -Wall
@@ -48,6 +48,7 @@ library:
     - LambdaCase
     - PartialTypeSignatures
     - TemplateHaskell
+    - OverloadedStrings
 
 executables:
   treegraphics-exe:
@@ -64,6 +65,7 @@ executables:
       - LambdaCase
       - PartialTypeSignatures
       - TemplateHaskell
+      - OverloadedStrings
     dependencies:
     - treegraphics
 

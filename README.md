@@ -2,7 +2,7 @@
 
 This project contains some code to simplify the graphics creation process for my papers in phylogenetics and combinatorics. 
 
-This is a work in progress! Usage guide and explanations are coming soon.
+**This is a work in progress!**
 
 ## Usage
 
@@ -33,4 +33,6 @@ Available options:
   -h,--help                Show this help text
 ```
 
-Trees are encoded in a simplified Newick format, like this: "((a,b),)
+Trees are encoded in a simplified Newick format, like this: `"((a,b),c)"`. Internal node labels are optional, but please provide them if you want to draw fully-labeled trees. Internal nodes are labeled by a string following the closing paren of the node, like this: `"((a,b)d,c)e"`.
+
+The input file should be a text file with a single tree on each line. Each diagram would be rendered into a separate output file. The format for output files is simple: define the desired file path as you would regularly, but add a `'%'` character to mark a place to insert a number. 
